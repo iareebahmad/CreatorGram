@@ -1,26 +1,12 @@
-# Video Hook Optimizer - Streamlit MVP
-# Single-file Streamlit app to upload a short video (or audio), transcribe it using
-# Google Web Speech (SpeechRecognition) and generate 3-5 short hooks + thumbnail
-# suggestions using a lightweight open-source LLM (google/flan-t5-small).
-
-# Limitations (see README below):
-# - Uses Google's free Web Speech API via the SpeechRecognition library for STT.
-#   That requires internet and is rate/length-limited. For production use, replace
-#   with a hosted Whisper/Vosk or a paid STT.
-# - Uses flan-t5-small from Hugging Face (via transformers). It's lightweight but
-#   still loads into RAM. Keep inputs short (<= 15s audio) while testing on
-#   Streamlit Community Cloud.
-
-# Requirements:
-# pip install streamlit transformers torch pydub SpeechRecognition soundfile
-# You also need ffmpeg available in PATH (Streamlit Cloud usually has ffmpeg).
-
 import streamlit as st
 from pydub import AudioSegment
 import tempfile
 import os
 import speech_recognition as sr
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+
+#requirements.txt → installs Python packages from PyPI.
+#packages.txt → installs apt packages (Linux system tools) before Python packages.
 
 st.set_page_config(page_title="CreatorGram", layout="centered")
 st.title("CreatorGram")
