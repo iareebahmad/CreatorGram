@@ -4,3 +4,4 @@ torch
 pydub
 SpeechRecognition
 soundfile
+ffmpeg
