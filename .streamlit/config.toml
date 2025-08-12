@@ -1,7 +1,7 @@
 [theme]
 base = "light"
-primaryColor = "#FF4B4B"
-backgroundColor = "#FFFFFF"
-secondaryBackgroundColor = "#F5F5F5"
-textColor = "#262730"
+primaryColor = "#FF6B6B"            # Warm coral red (eye-catching but softer than #FF4B4B)
+backgroundColor = "#FAFAFA"         # Clean, slightly off-white background
+secondaryBackgroundColor = "#F0F4F8" # Soft blue-grey panel for contrast
+textColor = "#2E3440"               # Deep, easy-to-read charcoal
 font = "sans serif"
