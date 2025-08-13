@@ -103,7 +103,7 @@ if uploaded_file is not None:
             transcript = transcribe_wav_google(wav_path)
         if transcript:
             st.success("Transcription complete — here's the detected text:")
-            st.write(transcript)
+            st.info(transcript)
         else:
             st.warning("Automatic transcription failed or was unreliable. Please paste a short transcript below.")
 
