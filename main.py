@@ -107,9 +107,35 @@ if uploaded_file is not None:
         else:
             st.warning("Automatic transcription failed or was unreliable. Please paste a short transcript below.")
 
+    # Let user edit or paste transcript
+    transcript_input = st.text_area(
+        "Transcript (edit or paste if auto-transcription failed)",
+        value=(transcript or ""),
+        height=120
+    )
+
+    # Generate hooks + thumbnail ideas
+    if st.button("Generate Hooks & Thumbnails"):
+        if not transcript_input.strip():
+            st.error("Please provide a short transcript.")
+        else:
+            with st.spinner("Loading model and generating ideas..."):
+                tokenizer, model = load_model()
+                gen = generate_hooks_and_thumbs(transcript_input.strip(), audience.strip(), tokenizer, model)
+
+            st.subheader("📌 Hooks")
+            hooks_section = [line.strip() for line in gen.splitlines() if line.strip()][:5]
+            for i, hook in enumerate(hooks_section, start=1):
+                st.write(f"{i}. {hook}")
+
+            st.subheader("🖼 Thumbnail Text Ideas")
+            thumbs_section = [line.strip() for line in gen.splitlines() if len(line.split()) <= 4][:5]
+            for thumb in thumbs_section:
+                st.write(f"- {thumb}")
 
 else:
     st.info("Upload a short video or audio to begin. You can also paste a short transcript directly.")
+
 
 # Footer / notes
 st.markdown("---")
