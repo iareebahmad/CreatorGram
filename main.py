@@ -107,32 +107,6 @@ if uploaded_file is not None:
         else:
             st.warning("Automatic transcription failed or was unreliable. Please paste a short transcript below.")
 
-    # allow user to edit or paste transcript
-    transcript_input = st.text_area("Transcript (edit or paste if auto-transcription failed)", value=(transcript or ""), height=120)
-
-    if st.button("Generate Hooks & Thumbnails"):
-        if not transcript_input.strip():
-            st.error("Please provide a short transcript (auto-transcription or manual) to generate hooks.")
-        else:
-            with st.spinner("Loading model and generating hooks — this may take a few seconds..."):
-                tokenizer, model = load_model()
-                gen = generate_hooks_and_thumbs(transcript_input.strip(), audience.strip(), tokenizer, model)
-            st.success("Done — model output below. Tweak as needed.")
-            st.markdown("**Raw model output:**")
-            st.code(gen)
-            st.markdown("**Suggested hooks (pick or edit):**")
-            # Simple post-processing: split by newlines and show bullets
-            for i, line in enumerate([l.strip() for l in gen.splitlines() if l.strip()][:15], start=1):
-                st.write(f"{i}. {line}")
-
-            st.markdown("**Thumbnail text ideas:**")
-            # naive extraction: look for short ALL CAPS lines in the model output or provide guidance
-            thumbs = [l.strip() for l in gen.splitlines() if l.strip() and len(l.split()) <= 4][:10]
-            if thumbs:
-                for t in thumbs:
-                    st.write(f"- {t}")
-            else:
-                st.write("Try: 'MUST WATCH', 'SAVE $', 'NO ONE TELLS' — keep it short and punchy.")
 
 else:
     st.info("Upload a short video or audio to begin. You can also paste a short transcript directly.")
