@@ -5,9 +5,6 @@ import os
 import speech_recognition as sr
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-#requirements.txt → installs Python packages from PyPI.
-#packages.txt → installs apt packages (Linux system tools) before Python packages.
-
 st.set_page_config(page_title="CreatorGram", layout="centered")
 st.title("CreatorGram")
 st.markdown("Upload a short video (or audio). The app will transcribe the first 15s and generate hook lines + thumbnail text suggestions.")
